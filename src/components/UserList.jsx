@@ -1,5 +1,14 @@
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchUsers } from "../store";
+
 function UserList() {
-  return <div>UserList</div>;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, [dispatch]);
+
+  return <div>UserLists</div>;
 }
 
 export default UserList;
