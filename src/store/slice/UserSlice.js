@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchUsers } from "../thunks/fetchUsers";
 import { addUser } from "../thunks/addUser";
-
+import { removeUser } from "../thunks/removeUser";
 const usersSlice = createSlice({
   name: "users",
   initialState: {
@@ -30,6 +30,18 @@ const usersSlice = createSlice({
       state.data.push(action.payload);
     });
     builders.addCase(addUser.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.error;
+    });
+    builders.addCase(removeUser.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builders.addCase(removeUser.fulfilled, (state, action) => {
+      state.isLoading = false;
+      // FIX ME!!!import { removeUser } from '../thunks/removeUser';
+      console.log(action);
+    });
+    builders.addCase(removeUser.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.error;
     });
