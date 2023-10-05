@@ -38,8 +38,7 @@ const usersSlice = createSlice({
     });
     builders.addCase(removeUser.fulfilled, (state, action) => {
       state.isLoading = false;
-      // FIX ME!!!import { removeUser } from '../thunks/removeUser';
-      console.log(action);
+      state.data = state.data.filter((user) => user.id !== action.payload.id);
     });
     builders.addCase(removeUser.rejected, (state, action) => {
       state.isLoading = false;
